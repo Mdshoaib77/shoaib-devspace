@@ -1978,7 +1978,7 @@ import { useEffect, useState, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { FaGithub, FaLinkedinIn, FaWhatsapp, FaVolumeHigh, FaVolumeXmark } from "react-icons/fa6";
 import { motion, AnimatePresence } from "framer-motion";
-import videoSrc from "../../Video/Web Development GIG.mp4";
+import videoSrc from "../../Video/videoresume.mp4";
 // import profileimage from "../../assets/profile2.png"
 
 export const Hero = () => {
