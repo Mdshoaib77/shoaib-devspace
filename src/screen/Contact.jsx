@@ -415,6 +415,13 @@ export const Contact = () => {
             animate={isInView ? { x: 0, opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
+          {/* <motion.div
+  className="contact-info-list w-half"
+  style={{ marginLeft: "auto", paddingLeft: "20px" }} // ✅ ONLY THIS ADDED
+  initial={{ x: 50, opacity: 0 }}
+  animate={isInView ? { x: 0, opacity: 1 } : {}}
+  transition={{ duration: 0.6, delay: 0.2 }}
+> */}
             <ul className="ul-reset">
               <li style={responsiveItemStyle}>
                 <div className="icon-box" style={responsiveIconBoxStyle}>
