@@ -213,13 +213,261 @@
 
 
 
+// import { useState, useEffect, useRef } from "react";
+// import { IoCallOutline } from "react-icons/io5";
+// import { TfiEmail } from "react-icons/tfi";
+// import { CiLocationOn } from "react-icons/ci";
+// import { motion, useInView } from "framer-motion";
+// import { toast, ToastContainer } from "react-toastify"; // Import Toastify
+// import "react-toastify/dist/ReactToastify.css"; // Import Toastify CSS
+
+// export const Contact = () => {
+//   const [contactInfo, setContactInfo] = useState({
+//     phone: "+01 123 654 8096",
+//     email: "gerolddesign@mail.com",
+//     address: "Warne Park Street Pine, FL 33157, New York",
+//   });
+
+//   const [isLoading, setIsLoading] = useState(false); // Loading state
+//   const ref = useRef(null);
+//   const isInView = useInView(ref, { once: true });
+
+//   useEffect(() => {
+//     const fetchContactInfo = async () => {
+//       const dummyData = {
+//         phone: "+8801724519674",
+//         email: "mdshoaibfullstack@gmail.com",
+//         address: "Rajsahi, Bogura, Bangladesh",
+//       };
+//       await new Promise((resolve) => setTimeout(resolve, 1000));
+//       setContactInfo(dummyData);
+//     };
+
+//     fetchContactInfo();
+//   }, []);
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     setIsLoading(true); // Set loading state to true when the form is submitted
+
+//     const formData = new FormData(e.target);
+
+//     // Sending form data to Web3Forms API
+//     const response = await fetch("https://api.web3forms.com/submit", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({
+//         access_key: "12c24b0a-d0d3-4d28-ad4f-5c5e2159c078",
+//         ...Object.fromEntries(formData),
+//       }),
+//     });
+
+//     const result = await response.json();
+//     setIsLoading(false); // Set loading state to false after the form is submitted
+
+//     if (result.success) {
+//       toast.success("Thank you! Your message has been sent successfully.");
+//       e.target.reset(); // Reset form on success
+//     } else {
+//       toast.error("Oops! Something went wrong. Please try again.");
+//     }
+//   };
+
+//   // Inline styles for responsive fixes while keeping existing CSS structure
+//   const responsiveItemStyle = {
+//     display: "flex",
+//     alignItems: "center",
+//     gap: "20px",
+//     marginBottom: "25px",
+//   };
+
+//   const responsiveIconBoxStyle = {
+//     display: "flex",
+//     alignItems: "center",
+//     justifyContent: "center",
+//     flexShrink: 0, // Prevents icon from squashing
+//   };
+
+//   return (
+//     <>
+//       {/* Toast container to show notifications */}
+//       <ToastContainer
+//         position="top-right"
+//         autoClose={5000}
+//         hideProgressBar={false}
+//         newestOnTop={false}
+//         closeOnClick
+//         rtl={false}
+//         pauseOnFocusLoss
+//         draggable
+//         pauseOnHover
+//       />
+
+//       <motion.section
+//         ref={ref} // Attach the ref to this section
+//         className="contact-section"
+//         id="contact-section" // Add ID to the section for scroll targeting
+//         initial={{ opacity: 0, y: 40 }}
+//         animate={isInView ? { opacity: 1, y: 0 } : {}}
+//         transition={{ duration: 0.8 }}
+//       >
+//         <div className="container flexSB" style={{ flexWrap: "wrap" }}>
+//           {/* Left: Form */}
+//           <motion.div
+//             className="contact-form-box w-half"
+//             initial={{ x: -50, opacity: 0 }}
+//             animate={isInView ? { x: 0, opacity: 1 } : {}}
+//             transition={{ duration: 0.6 }}
+//           >
+//             <div className="section-header">
+//               <h2 className="section-title">Let’s work together!</h2>
+//               <p>
+//                 I design and code beautifully simple things and I love what I
+//                 do. Just simple like that!
+//               </p>
+//             </div>
+
+//             <div className="tj-contact-form">
+//               <form onSubmit={handleSubmit} className="tj-contact-form">
+//                 <div className="flexSB gap">
+//                   <div className="form_group">
+//                     <input
+//                       type="text"
+//                       name="first_name"
+//                       placeholder="First name"
+//                       required
+//                     />
+//                   </div>
+//                   <div className="form_group">
+//                     <input
+//                       type="text"
+//                       name="last_name"
+//                       placeholder="Last name"
+//                       required
+//                     />
+//                   </div>
+//                 </div>
+
+//                 <div className="flexSB gap">
+//                   <div className="form_group">
+//                     <input
+//                       type="email"
+//                       name="email"
+//                       placeholder="Email address"
+//                       required
+//                     />
+//                   </div>
+//                   <div className="form_group">
+//                     <input
+//                       type="tel"
+//                       name="phone"
+//                       placeholder="Phone number"
+//                     />
+//                   </div>
+//                 </div>
+
+//                 <div className="form_group">
+//                   <select name="service" className="tj-nice-select" required>
+//                     <option value="" disabled selected>
+//                       Choose Service
+//                     </option>
+//                     <option value="Full Stack Web Development">
+//                       Full Stack Web Development
+//                     </option>
+//                     <option value="Backend & API Development">
+//                       Backend & API Development
+//                     </option>
+//                     <option value="Frontend Development">
+//                       Frontend Development
+//                     </option>
+
+//                     <option value="Branding Design">Branding Design</option>
+//                     {/* <option value="Web Design">Web Design</option> */}
+//                     <option value="UI/UX Design">UI/UX Design</option>
+//                     <option value="Graphics Design">Graphics Design</option>
+//                   </select>
+//                 </div>
+
+//                 <div className="form_group">
+//                   <textarea
+//                     name="message"
+//                     placeholder="Message"
+//                     required
+//                   ></textarea>
+//                 </div>
+
+//                 <div className="form_btn">
+//                   <button type="submit" className="btn tj-btn-primary">
+//                     {isLoading ? "Sending..." : "Send Message"}{" "}
+//                     {/* Display loading text */}
+//                   </button>
+//                 </div>
+//               </form>
+//             </div>
+//           </motion.div>
+
+//           {/* Right: Contact Info */}
+//           <motion.div
+//             className="contact-info-list w-half"
+//             initial={{ x: 50, opacity: 0 }}
+//             animate={isInView ? { x: 0, opacity: 1 } : {}}
+//             transition={{ duration: 0.6, delay: 0.2 }}
+//           >
+//           {/* <motion.div
+//   className="contact-info-list w-half"
+//   style={{ marginLeft: "auto", paddingLeft: "20px" }} // ✅ ONLY THIS ADDED
+//   initial={{ x: 50, opacity: 0 }}
+//   animate={isInView ? { x: 0, opacity: 1 } : {}}
+//   transition={{ duration: 0.6, delay: 0.2 }}
+// > */}
+//             <ul className="ul-reset">
+//               <li style={responsiveItemStyle}>
+//                 <div className="icon-box" style={responsiveIconBoxStyle}>
+//                   <IoCallOutline size={25} />
+//                 </div>
+//                 <div className="text-box">
+//                   <p>Phone</p>
+//                   <a href={`tel:${contactInfo.phone}`}>{contactInfo.phone}</a>
+//                 </div>
+//               </li>
+//               <li style={responsiveItemStyle}>
+//                 <div className="icon-box" style={responsiveIconBoxStyle}>
+//                   <TfiEmail size={22} />
+//                 </div>
+//                 <div className="text-box">
+//                   <p>Email</p>
+//                   <a href={`mailto:${contactInfo.email}`}>
+//                     {contactInfo.email}
+//                   </a>
+//                 </div>
+//               </li>
+//               <li style={responsiveItemStyle}>
+//                 <div className="icon-box" style={responsiveIconBoxStyle}>
+//                   <CiLocationOn size={25} />
+//                 </div>
+//                 <div className="text-box">
+//                   <p>Address</p>
+//                   <span>{contactInfo.address}</span>
+//                 </div>
+//               </li>
+//             </ul>
+//           </motion.div>
+//         </div>
+//       </motion.section>
+//     </>
+//   );
+// };
+
+
 import { useState, useEffect, useRef } from "react";
 import { IoCallOutline } from "react-icons/io5";
 import { TfiEmail } from "react-icons/tfi";
 import { CiLocationOn } from "react-icons/ci";
 import { motion, useInView } from "framer-motion";
-import { toast, ToastContainer } from "react-toastify"; // Import Toastify
-import "react-toastify/dist/ReactToastify.css"; // Import Toastify CSS
+import { toast, ToastContainer } from "react-toastify"; 
+import "react-toastify/dist/ReactToastify.css";
 
 export const Contact = () => {
   const [contactInfo, setContactInfo] = useState({
@@ -228,7 +476,7 @@ export const Contact = () => {
     address: "Warne Park Street Pine, FL 33157, New York",
   });
 
-  const [isLoading, setIsLoading] = useState(false); // Loading state
+  const [isLoading, setIsLoading] = useState(false);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
@@ -248,16 +496,13 @@ export const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true); // Set loading state to true when the form is submitted
+    setIsLoading(true);
 
     const formData = new FormData(e.target);
 
-    // Sending form data to Web3Forms API
     const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         access_key: "12c24b0a-d0d3-4d28-ad4f-5c5e2159c078",
         ...Object.fromEntries(formData),
@@ -265,17 +510,16 @@ export const Contact = () => {
     });
 
     const result = await response.json();
-    setIsLoading(false); // Set loading state to false after the form is submitted
+    setIsLoading(false);
 
     if (result.success) {
       toast.success("Thank you! Your message has been sent successfully.");
-      e.target.reset(); // Reset form on success
+      e.target.reset();
     } else {
       toast.error("Oops! Something went wrong. Please try again.");
     }
   };
 
-  // Inline styles for responsive fixes while keeping existing CSS structure
   const responsiveItemStyle = {
     display: "flex",
     alignItems: "center",
@@ -287,12 +531,11 @@ export const Contact = () => {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    flexShrink: 0, // Prevents icon from squashing
+    flexShrink: 0,
   };
 
   return (
     <>
-      {/* Toast container to show notifications */}
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -306,12 +549,19 @@ export const Contact = () => {
       />
 
       <motion.section
-        ref={ref} // Attach the ref to this section
+        ref={ref}
         className="contact-section"
-        id="contact-section" // Add ID to the section for scroll targeting
+        id="contact-section"
         initial={{ opacity: 0, y: 40 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8 }}
+        style={{
+          background: "linear-gradient(135deg, #030712 0%, #020617 40%, #030712 100%)", // Hero BG Added
+          paddingTop: "120px",
+          paddingBottom: "120px",
+          color: "#fff",
+          fontFamily: "Segoe UI, sans-serif",
+        }}
       >
         <div className="container flexSB" style={{ flexWrap: "wrap" }}>
           {/* Left: Form */}
@@ -382,9 +632,7 @@ export const Contact = () => {
                     <option value="Frontend Development">
                       Frontend Development
                     </option>
-
                     <option value="Branding Design">Branding Design</option>
-                    {/* <option value="Web Design">Web Design</option> */}
                     <option value="UI/UX Design">UI/UX Design</option>
                     <option value="Graphics Design">Graphics Design</option>
                   </select>
@@ -400,8 +648,7 @@ export const Contact = () => {
 
                 <div className="form_btn">
                   <button type="submit" className="btn tj-btn-primary">
-                    {isLoading ? "Sending..." : "Send Message"}{" "}
-                    {/* Display loading text */}
+                    {isLoading ? "Sending..." : "Send Message"}
                   </button>
                 </div>
               </form>
@@ -415,13 +662,6 @@ export const Contact = () => {
             animate={isInView ? { x: 0, opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-          {/* <motion.div
-  className="contact-info-list w-half"
-  style={{ marginLeft: "auto", paddingLeft: "20px" }} // ✅ ONLY THIS ADDED
-  initial={{ x: 50, opacity: 0 }}
-  animate={isInView ? { x: 0, opacity: 1 } : {}}
-  transition={{ duration: 0.6, delay: 0.2 }}
-> */}
             <ul className="ul-reset">
               <li style={responsiveItemStyle}>
                 <div className="icon-box" style={responsiveIconBoxStyle}>
